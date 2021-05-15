@@ -1,0 +1,10 @@
+|===
+|Parameter|Description
+
+|`+page+`
+|조회할 페이지
+
+|`+size+`
+|페이지에 노출될 항목 갯수
+
+|===
