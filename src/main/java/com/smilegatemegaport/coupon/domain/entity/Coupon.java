@@ -23,24 +23,24 @@ public class Coupon implements Persistable<String> {
     private Long sequence;
     private String phoneNumber;
     private String couponNumber;
-    private LocalDateTime createTime;
+    private LocalDateTime issuedDate;
+
+    @PrePersist
+    protected void onUpdate() {
+        issuedDate = LocalDateTime.now();
+    }
 
     @Override
     @Transient
     @JsonIgnore
     public String getId() {
-        return this.phoneNumber;
+        return phoneNumber;
     }
 
     @Override
     @Transient
     @JsonIgnore
     public boolean isNew() {
-        return null == getId();
-    }
-
-    @PrePersist
-    protected void onUpdate() {
-        createTime = LocalDateTime.now();
+        return true;
     }
 }
