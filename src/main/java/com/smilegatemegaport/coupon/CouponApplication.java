@@ -1,13 +1,13 @@
-package com.smilegatemegaport.mobilereserve.server;
+package com.smilegatemegaport.coupon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServerApplication {
+public class CouponApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServerApplication.class, args);
+		SpringApplication.run(CouponApplication.class, args);
 	}
 
 }
