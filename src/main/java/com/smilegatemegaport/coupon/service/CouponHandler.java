@@ -2,6 +2,7 @@ package com.smilegatemegaport.coupon.service;
 
 import com.smilegatemegaport.coupon.domain.CouponRepository;
 import com.smilegatemegaport.coupon.domain.entity.Coupon;
+import com.smilegatemegaport.coupon.exception.CouponAlreadyIssuedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +39,9 @@ public class CouponHandler implements CouponService {
 
     @Override
     public void issueCoupon(String phoneNumber) {
-        Coupon coupon = Coupon.builder()
+        Coupon coupon = couponRepository.findByPhoneNumber(phoneNumber);
+        if (coupon != null) throw CouponAlreadyIssuedException.thrown(coupon);
+        coupon = Coupon.builder()
                 .couponNumber(generateCouponNumber())
                 .phoneNumber(phoneNumber)
                 .build();
