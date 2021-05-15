@@ -36,7 +36,6 @@ public class Coupon implements Persistable<String> {
     @Transient
     @JsonIgnore
     public boolean isNew() {
-        log.info("{}", null == getId());
         return null == getId();
     }
 

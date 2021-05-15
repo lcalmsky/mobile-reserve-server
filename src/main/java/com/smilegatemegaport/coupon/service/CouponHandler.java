@@ -49,7 +49,6 @@ public class CouponHandler implements CouponService {
 
     private String generateCouponNumber() {
         Collections.shuffle(COMBINATION_OF_LETTERS);
-        log.info("{}", COMBINATION_OF_LETTERS);
         String couponNumber = String.join("", COMBINATION_OF_LETTERS.subList(0, 11));
         log.info(couponNumber);
         return String.format("%s-%s-%s", couponNumber.substring(0, 4), couponNumber.substring(4, 8), couponNumber.substring(8));
