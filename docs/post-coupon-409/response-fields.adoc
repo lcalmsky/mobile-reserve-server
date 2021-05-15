@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+couponNumber+`
+|`+String+`
+|이미 발급된 쿠폰 번호
+
+|`+issuedDate+`
+|`+String+`
+|쿠폰 발급 일시
+
+|===

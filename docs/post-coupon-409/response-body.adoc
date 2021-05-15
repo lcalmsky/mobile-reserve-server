@@ -1,0 +1,7 @@
+[source,options="nowrap"]
+----
+{
+  "couponNumber" : "Hk1K-4Z3d-o8Q",
+  "issuedDate" : "2021-05-16T03:38:19.756316"
+}
+----
