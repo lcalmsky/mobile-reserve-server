@@ -1,10 +1,10 @@
-package com.smilegatemegaport.mobilereserveserver;
+package com.smilegatemegaport.mobilereserve.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MobileReserveServerApplicationTests {
+class ServerApplicationTests {
 
 	@Test
 	void contextLoads() {

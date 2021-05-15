@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.smilegatemegaport'
+group = 'com.smilegatemegaport.mobile-reserve'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
