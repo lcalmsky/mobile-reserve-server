@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/v1/coupon
+Content-Type: application/json;charset=UTF-8
+
+{
+  "phoneNumber": "01053833922"
+}
+
+###
+GET http://localhost:8080/api/v1/coupon?page=1&size=10
