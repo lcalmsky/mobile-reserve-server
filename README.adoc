@@ -27,15 +27,15 @@ v1.0.0, {localdate}
 
 == 서버 정보 및 공통 항목
 
-include::{docdir}/common/server-info.adoc[]
+include::docs/common/server-info.adoc[]
 
 == 쿠폰 발급 APIs
 
-include::{docdir}/post-coupon.adoc[]
+include::docs/post-coupon.adoc[]
 
 == 쿠폰 조회 APIs
 
-include::{docdir}/get-coupon.adoc[]
+include::docs/get-coupon.adoc[]
 
 ifeval::['{internalOnly}' == 'yes']
 == Miscellaneous
