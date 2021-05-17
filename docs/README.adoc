@@ -27,15 +27,21 @@ v1.0.0, {localdate}
 
 == 서버 정보 및 공통 항목
 
+ifndef::env-github[]
 include::common/server-info.adoc[]
+endif::[]
 
 == 쿠폰 발급 APIs
 
+ifndef::env-github[]
 include::post-coupon.adoc[]
+endif::[]
 
 == 쿠폰 조회 APIs
 
+ifndef::env-github[]
 include::get-coupon.adoc[]
+endif::[]
 
 ifeval::['{internalOnly}' == 'yes']
 == Miscellaneous
