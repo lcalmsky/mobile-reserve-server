@@ -47,7 +47,7 @@ https://asciidoctor.org/docs/install-asciidoctor-macos/[Asciidoctor Installation
 
 [source,bash]
 ----
-$ asciidoctor README.adoc -a setanchors=true -a idseparator=- -a doctype=book -a docinfo1=true -a toclevels=3 -a sectanchors -a sectlinks -o coupon-api-v1.0.0.html
+$ asciidoctor README.adoc -a setanchors=true -a idseparator=- -a doctype=book -a docinfo1=true -a toclevels=3 -a sectanchors -a sectlinks -o index.html
 ----
 
 === Install Source Highlighter (MAC)
