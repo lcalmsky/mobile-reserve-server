@@ -1,0 +1,45 @@
+=== 쿠폰 발급 API
+
+휴대폰 번호에 대해 고유한 쿠폰을 발급합니다. +
+같은 번호로 여러 번 요청할 수 없습니다.
+
+==== Request
+
+===== URI
+
+``POST`` /api/v1/coupon
+
+===== Header
+
+include::common/common-header.adoc[]
+
+===== Parameter
+
+//include::post-coupon/request-parameters.adoc[]
+
+===== Body
+
+include::post-coupon/request-fields.adoc[]
+
+===== Examples
+
+.curl
+include::post-coupon/curl-request.adoc[]
+
+.http
+include::post-coupon/http-request.adoc[]
+
+.httpie
+include::post-coupon/httpie-request.adoc[]
+
+==== Response
+
+* 성공
+
+include::post-coupon/http-response.adoc[]
+
+* 중복
+
+include::post-coupon-409/response-fields.adoc[]
+
+include::post-coupon-409/http-response.adoc[]

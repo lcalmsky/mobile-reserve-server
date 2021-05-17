@@ -1,0 +1,60 @@
+= 연동개발 가이드
+이정민 <lcalmsky@gmail.com>
+v1.0.0, {localdate}
+:toc: left
+:imagesdir: docs/assets/images
+:homepage: https://github.com/lcalmsky
+:source-highlighter: pygments
+:pygments-style: friendly
+:sectnums:
+:sectnumlevels: 3
+:icons: font
+:internalOnly: no
+:implicitPaymentIncluded: no
+:checkValidityIncluded: no
+
+.Overview
+****
+쿠폰 발급 및 조회를 위해 아래 API를 사용합니다.
+
+----
+1. 쿠폰 발급 API: 휴대폰 번호 별로 고유한 쿠폰 번호를 발급합니다. // <1>
+
+2. 쿠폰 조회 API: 발급된 쿠폰을 조회합니다. // <1>
+----
+<1> ``쿠폰 발급 API``, ``쿠폰 조회 API``는 API 방식으로 쿠폰 서버와 연동합니다.
+****
+
+== 서버 정보 및 공통 항목
+
+include::common/server-info.adoc[]
+
+== 쿠폰 발급 APIs
+
+include::post-coupon.adoc[]
+
+== 쿠폰 조회 APIs
+
+include::get-coupon.adoc[]
+
+ifeval::['{internalOnly}' == 'yes']
+== Miscellaneous
+
+=== Installing Asciidoctor (MAC)
+https://asciidoctor.org/docs/install-asciidoctor-macos/[Asciidoctor Installation Guide on macOS]
+
+=== Shell Command
+
+[source,bash]
+----
+$ asciidoctor README.adoc -a setanchors=true -a idseparator=- -a doctype=book -a docinfo1=true -a toclevels=3 -a sectanchors -a sectlinks -o coupon-api-v1.0.0.html
+----
+
+=== Install Source Highlighter (MAC)
+[source,bash]
+----
+$ sudo gem install pygments.rb
+----
+endif::[]
+
+//  asciidoctor README.adoc -a setanchors=true -a idseparator=- -a doctype=book -a docinfo1=true -a toclevels=3 -a sectanchors -a sectlinks -o ../README.html

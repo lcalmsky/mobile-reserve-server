@@ -1,0 +1,40 @@
+=== 쿠폰 조회 API
+
+발급된 쿠폰의 순번, 번호, 일시, 휴대폰 번호를 조회합니다.
+
+==== Request
+
+===== URI
+
+``GET`` /api/v1/coupon
+
+===== Header
+
+include::common/common-header.adoc[]
+
+===== Parameter
+
+include::get-coupon/request-parameters.adoc[]
+
+===== Body
+
+include::get-coupon/request-fields.adoc[]
+
+===== Examples
+
+.curl
+include::get-coupon/curl-request.adoc[]
+
+.http
+include::get-coupon/http-request.adoc[]
+
+.httpie
+include::get-coupon/httpie-request.adoc[]
+
+==== Response
+
+* 성공
+
+include::get-coupon/response-fields.adoc[]
+
+include::get-coupon/http-response.adoc[]
