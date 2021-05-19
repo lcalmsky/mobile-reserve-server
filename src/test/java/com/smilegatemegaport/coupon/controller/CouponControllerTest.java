@@ -8,6 +8,7 @@ import com.smilegatemegaport.coupon.service.CouponService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -24,6 +26,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -38,6 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @AutoConfigureRestDocs(outputDir = "docs")
 @WebMvcTest(CouponController.class)
+@ActiveProfiles("test")
 class CouponControllerTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -98,14 +102,16 @@ class CouponControllerTest {
                 ));
     }
 
+    @Mock
+    private CouponController couponController;
+
     @Test
     @DisplayName("쿠폰 발급 내역 조회")
     public void whenGetCoupons_thenCorrect() throws Exception {
 
-        couponService.issueCoupon("01012345678");
-        couponService.issueCoupon("01098765432");
-
-//        PageRequest pageRequest = PageRequest.of(1, 10);
+//        couponService.issueCoupon("01012345678");
+//        couponService.issueCoupon("01098765432");
+//
 //        when(couponService.getCoupons(pageRequest)).
 //                thenReturn(new PageImpl<>(Arrays.asList(
 //                        Coupon.builder()
@@ -122,6 +128,21 @@ class CouponControllerTest {
 //                                .build()
 //                ), pageRequest, 2));
 
+        when(couponController.getCoupons(any())).thenReturn(new PageImpl<>(Arrays.asList(
+                Coupon.builder()
+                        .phoneNumber("01012345678")
+                        .issuedDate(LocalDateTime.now())
+                        .sequence(1L)
+                        .couponNumber("Hk1K-4Z3d-o8Q")
+                        .build(),
+                Coupon.builder()
+                        .phoneNumber("01098765432")
+                        .issuedDate(LocalDateTime.now().minus(Duration.ofMinutes(10)))
+                        .sequence(2L)
+                        .couponNumber("nvHM-i6qV-K4N")
+                        .build()
+        )));
+
         ResultActions resultActions = mockMvc.perform(get("/api/v1/coupon")
                 .accept(MediaType.APPLICATION_JSON)
                 .queryParam("page", "1")
@@ -135,14 +156,23 @@ class CouponControllerTest {
                         requestParameters(
                                 parameterWithName("page").description("조회할 페이지").optional(),
                                 parameterWithName("size").description("페이지에 노출될 항목 갯수").optional()
-                        )/*,
+                        ),
                         responseFields(
                                 fieldWithPath("content[]").type(JsonFieldType.ARRAY).description("쿠폰 내역 리스트"),
                                 fieldWithPath("content[].sequence").type(JsonFieldType.NUMBER).description("쿠폰 순번"),
                                 fieldWithPath("content[].phoneNumber").type(JsonFieldType.STRING).description("휴대폰 번호"),
                                 fieldWithPath("content[].couponNUmber").type(JsonFieldType.STRING).description("쿠폰 번호"),
                                 fieldWithPath("content[].issuedDate").type(JsonFieldType.STRING).description("쿠폰 발급 일시"),
-                                fieldWithPath("pageable").type(JsonFieldType.STRING).description("페이징 정보"),
+                                fieldWithPath("pageable").type(JsonFieldType.OBJECT).description("페이징 정보"),
+                                fieldWithPath("pageable.sort").type(JsonFieldType.OBJECT).description("요청시 정렬 정보"),
+                                fieldWithPath("pageable.sort.unsorted").type(JsonFieldType.BOOLEAN).description("unsorted"),
+                                fieldWithPath("pageable.sort.sorted").type(JsonFieldType.BOOLEAN).description("sorted"),
+                                fieldWithPath("pageable.sort.empty").type(JsonFieldType.BOOLEAN).description("empty"),
+                                fieldWithPath("pageable.offset").type(JsonFieldType.NUMBER).description("offset"),
+                                fieldWithPath("pageable.pageNumber").type(JsonFieldType.NUMBER).description("pageNumber"),
+                                fieldWithPath("pageable.pageSize").type(JsonFieldType.NUMBER).description("pageSize"),
+                                fieldWithPath("pageable.paged").type(JsonFieldType.BOOLEAN).description("paged"),
+                                fieldWithPath("pageable.unpaged").type(JsonFieldType.BOOLEAN).description("unpaged"),
                                 fieldWithPath("last").type(JsonFieldType.BOOLEAN).description("마지막 페이지 여부"),
                                 fieldWithPath("totalPages").type(JsonFieldType.NUMBER).description("전체 페이지 수"),
                                 fieldWithPath("totalElements").type(JsonFieldType.NUMBER).description("전체 항목 갯수"),
@@ -152,7 +182,7 @@ class CouponControllerTest {
                                 fieldWithPath("numberOfElements").type(JsonFieldType.NUMBER).description("항목 갯수"),
                                 fieldWithPath("first").type(JsonFieldType.BOOLEAN).description("첫 페이지 여부"),
                                 fieldWithPath("empty").type(JsonFieldType.BOOLEAN).description("조회 결과가 비어있는지 여부")
-                        )*/
+                        )
                 ));
     }
 }
